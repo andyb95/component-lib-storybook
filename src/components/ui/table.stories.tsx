@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { MoreHorizontal } from 'lucide-react'
 import {
   Table,
   TableBody,
@@ -9,6 +10,15 @@ import {
   TableHeader,
   TableRow,
 } from './table'
+import { Button } from './button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './dropdown-menu'
 
 const meta = {
   title: 'UI/Table',
@@ -54,6 +64,61 @@ export const Default: Story = {
         <TableFooter>
           <TableRow>
             <TableCell colSpan={3}>Total</TableCell>
+            <TableCell className="text-right">$1,750.00</TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </div>
+  ),
+}
+
+export const WithRowActions: Story = {
+  render: () => (
+    <div className="w-[680px]">
+      <Table>
+        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Method</TableHead>
+            <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="w-[40px]" />
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {invoices.map((invoice) => (
+            <TableRow key={invoice.invoice}>
+              <TableCell className="font-medium">{invoice.invoice}</TableCell>
+              <TableCell>{invoice.status}</TableCell>
+              <TableCell>{invoice.method}</TableCell>
+              <TableCell className="text-right">{invoice.amount}</TableCell>
+              <TableCell>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                      <MoreHorizontal className="h-4 w-4" />
+                      <span className="sr-only">Open menu</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>View details</DropdownMenuItem>
+                    <DropdownMenuItem>Edit</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="text-destructive focus:text-destructive">
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={4}>Total</TableCell>
             <TableCell className="text-right">$1,750.00</TableCell>
           </TableRow>
         </TableFooter>
