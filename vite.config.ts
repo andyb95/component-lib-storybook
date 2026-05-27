@@ -33,6 +33,7 @@ export default defineConfig({
     }
   },
   build: {
+    copyPublicDir: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'AndyBUI',
