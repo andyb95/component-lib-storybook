@@ -19,6 +19,9 @@ export default defineConfig({
     dts({ include: ['src'], exclude: ['src/**/*.stories.*'] }),
     {
       name: 'copy-variables-css',
+      apply(config) {
+        return !!config.build?.lib;
+      },
       closeBundle() {
         fs.copyFileSync(
           resolve(dirname, 'src/styles/variables.css'),

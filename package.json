@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && tsc -p tsconfig.lib.json",
     "build:watch": "vite build --watch",
     "lint": "eslint .",
     "preview": "vite preview",
