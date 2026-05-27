@@ -44,13 +44,18 @@ export default defineConfig({
       fileName: format => `index.${format}.js`
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      // Externalize every dependency so none of their CJS code gets bundled into the ES output.
+      // This prevents rolldown from injecting a `require()` shim that breaks in ESM consumers.
+      external: (id) =>
+        ['react', 'react-dom', 'react/jsx-runtime'].includes(id) ||
+        /^@radix-ui\//.test(id) ||
+        ['class-variance-authority', 'clsx', 'tailwind-merge', 'lucide-react'].includes(id),
       output: {
         globals: {
           react: 'React',
-          'react-dom': 'ReactDOM'
-        }
-      }
+          'react-dom': 'ReactDOM',
+        },
+      },
     }
   },
   test: {
