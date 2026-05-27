@@ -29,4 +29,15 @@ export { Switch } from './components/ui/switch'
 
 export { Checkbox } from './components/ui/checkbox'
 
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from './components/ui/table'
+
 export { cn } from './lib/utils'
